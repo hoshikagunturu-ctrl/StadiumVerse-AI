@@ -10,10 +10,13 @@ import { useUserRole } from '../context/UserRoleContext';
 import type { UserRole } from '../context/UserRoleContext';
 import { useSettings } from '../context/SettingsContext';
 import { Breadcrumbs } from './Breadcrumbs';
+import { useTranslation } from '../hooks/useTranslation';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  
+  const { t } = useTranslation();
   
   const { 
     highContrast, setHighContrast, 
@@ -36,37 +39,37 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   const navGroups = [
     {
-      title: "Command Center",
+      title: t("Command Center"),
       links: [
-        { path: "/", label: "Tournament Portal", icon: <Globe size={18} /> },
-        { path: "/fan-dashboard", label: "Fan Hub", icon: <LayoutDashboard size={18} />, role: "fan" },
-        { path: "/volunteer-dashboard", label: "Volunteer Grid", icon: <LayoutDashboard size={18} />, role: "volunteer" },
-        { path: "/organizer-dashboard", label: "Operations Command", icon: <LayoutDashboard size={18} />, role: "organizer" },
+        { path: "/", label: t("Tournament Portal"), icon: <Globe size={18} /> },
+        { path: "/fan-dashboard", label: t("Fan Hub"), icon: <LayoutDashboard size={18} />, role: "fan" },
+        { path: "/volunteer-dashboard", label: t("Volunteer Grid"), icon: <LayoutDashboard size={18} />, role: "volunteer" },
+        { path: "/organizer-dashboard", label: t("Operations Command"), icon: <LayoutDashboard size={18} />, role: "organizer" },
       ]
     },
     {
-      title: "AI Services",
+      title: t("AI Services"),
       links: [
-        { path: "/ai-assistant", label: "Ask AI Assistant", icon: <Sparkles size={18} /> },
-        { path: "/indoor-navigation", label: "Stadium Pathfinder", icon: <MapPin size={18} /> },
-        { path: "/queue-prediction", label: "Queue Analytics", icon: <Clock size={18} /> },
+        { path: "/ai-assistant", label: t("Ask AI Assistant"), icon: <Sparkles size={18} /> },
+        { path: "/indoor-navigation", label: t("Stadium Pathfinder"), icon: <MapPin size={18} /> },
+        { path: "/queue-prediction", label: t("Queue Analytics"), icon: <Clock size={18} /> },
       ]
     },
     {
-      title: "Fan Experience",
+      title: t("Fan Experience"),
       links: [
-        { path: "/food-recommendations", label: "Gourmet Eats", icon: <Utensils size={18} /> },
-        { path: "/lost-and-found", label: "Lost & Found Log", icon: <Shield size={18} /> },
-        { path: "/eco-assistant", label: "Eco Rewards", icon: <Leaf size={18} /> },
+        { path: "/food-recommendations", label: t("Gourmet Eats"), icon: <Utensils size={18} /> },
+        { path: "/lost-and-found", label: t("Lost & Found Log"), icon: <Shield size={18} /> },
+        { path: "/eco-assistant", label: t("Eco Rewards"), icon: <Leaf size={18} /> },
       ]
     },
     {
-      title: "Safety & Logistics",
+      title: t("Safety & Logistics"),
       links: [
-        { path: "/transport-suggestions", label: "Transit departures", icon: <Bus size={18} /> },
-        { path: "/emergency-center", label: "SOS Response Room", icon: <ShieldAlert size={18} /> },
-        { path: "/accessibility-mode", label: "Access Settings", icon: <Accessibility size={18} /> },
-        { path: "/settings", label: "Control Panel", icon: <Settings size={18} /> },
+        { path: "/transport-suggestions", label: t("Transit departures"), icon: <Bus size={18} /> },
+        { path: "/emergency-center", label: t("SOS Response Room"), icon: <ShieldAlert size={18} /> },
+        { path: "/accessibility-mode", label: t("Access Settings"), icon: <Accessibility size={18} /> },
+        { path: "/settings", label: t("Control Panel"), icon: <Settings size={18} /> },
       ]
     }
   ];
@@ -116,8 +119,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 FWC
               </div>
               <div>
-                <h1 className="text-sm font-extrabold tracking-tight font-display m-0 leading-none">STADIUMVERSE AI</h1>
-                <span className="text-[10px] font-bold text-secondary uppercase tracking-widest leading-none">Real-Time Operations</span>
+                <h1 className="text-sm font-extrabold tracking-tight font-display m-0 leading-none">{t("StadiumVerse AI")}</h1>
+                <span className="text-[10px] font-bold text-secondary uppercase tracking-widest leading-none">{t("Real-Time Operations")}</span>
               </div>
             </Link>
           </div>

@@ -23,7 +23,8 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
     return (localStorage.getItem('text-scale') as TextScale) || 'normal';
   });
   const [screenReaderActive, setScreenReaderActive] = useState<boolean>(() => {
-    return localStorage.getItem('sr-active') === 'true';
+    const saved = localStorage.getItem('sr-active');
+    return saved === null ? true : saved === 'true';
   });
   const [lastSpokenText, setLastSpokenText] = useState<string>('');
 
@@ -60,11 +61,26 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const speak = (text: string) => {
     setLastSpokenText(text);
-    if (screenReaderActive && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 1.0;
-      window.speechSynthesis.speak(utterance);
+    if ('speechSynthesis' in window) {
+      try {
+        window.speechSynthesis.cancel();
+        
+        if (!screenReaderActive) return;
+
+        setTimeout(() => {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.rate = 1.0;
+          
+          const voices = window.speechSynthesis.getVoices();
+          if (voices && voices.length > 0) {
+            const enVoice = voices.find(v => v.lang.startsWith('en')) || voices[0];
+            utterance.voice = enVoice;
+          }
+          window.speechSynthesis.speak(utterance);
+        }, 50);
+      } catch (err) {
+        console.error("Speech Synthesis Error:", err);
+      }
     }
   };
 

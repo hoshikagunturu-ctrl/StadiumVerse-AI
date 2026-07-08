@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/Card';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface DashboardCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -15,11 +16,12 @@ export const DashboardCard: React.FC<DashboardCardProps> = ({
   className = '',
   ...props
 }) => {
+  const { t } = useTranslation();
   return (
     <Card variant={variant} className={className} {...props}>
       <CardHeader className="py-3.5 px-5 flex items-center justify-between border-b border-slate-100 dark:border-white/5">
         <CardTitle className="text-xs font-extrabold uppercase font-display tracking-wider text-primary dark:text-white">
-          {title}
+          {t(title)}
         </CardTitle>
         {headerActions && <div>{headerActions}</div>}
       </CardHeader>

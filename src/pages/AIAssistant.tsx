@@ -9,6 +9,7 @@ import { Sparkles, Send, User, Bot, HelpCircle } from 'lucide-react';
 import { geminiService } from '../services/gemini';
 import type { GeminiContent } from '../services/gemini';
 import ReactMarkdown from 'react-markdown';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface Message {
   sender: 'user' | 'ai';
@@ -18,6 +19,7 @@ interface Message {
 
 export const AIAssistant: React.FC = () => {
   const { speak } = useAccessibility();
+  const { t } = useTranslation();
   const { user } = useUserRole();
   const [messages, setMessages] = useState<Message[]>([
     { 
@@ -115,10 +117,10 @@ export const AIAssistant: React.FC = () => {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-extrabold text-primary dark:text-white uppercase font-display leading-tight">
-          AI Stadium Assistant
+          {t("AI Stadium Assistant")}
         </h2>
         <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">
-          Instant matchday companion chatbot
+          {t("Instant matchday companion chatbot")}
         </p>
       </div>
 
@@ -129,7 +131,7 @@ export const AIAssistant: React.FC = () => {
           <CardHeader className="bg-slate-50/50 dark:bg-white/5 border-b border-slate-100">
             <CardTitle className="text-xs uppercase tracking-wider text-primary">
               <HelpCircle size={14} className="text-secondary" />
-              Suggested Inquiries
+              {t("Suggested Inquiries")}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 space-y-2">
@@ -150,9 +152,9 @@ export const AIAssistant: React.FC = () => {
           <CardHeader className="bg-slate-50/50 dark:bg-white/5 border-b border-slate-100 py-3 flex items-center justify-between">
             <CardTitle className="text-sm uppercase tracking-wider text-primary flex items-center gap-2">
               <Sparkles size={16} className="text-secondary animate-pulse-glow" />
-              Simulated Stadium Brain Feed
+              {t("Simulated Stadium Brain Feed")}
             </CardTitle>
-            <Badge variant="primary" className="border-primary/20">Operational Concierge</Badge>
+            <Badge variant="primary" className="border-primary/20">{t("Operational Concierge")}</Badge>
           </CardHeader>
 
           {/* Messages Area */}
@@ -204,9 +206,9 @@ export const AIAssistant: React.FC = () => {
             <Input 
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Ask about gates, food wait times, first-aid..."
+              placeholder={t("Ask about gates, food wait times, first-aid...")}
               className="flex-1"
-              aria-label="Ask AI Stadium Assistant"
+              aria-label={t("Ask AI Stadium Assistant")}
             />
             <Button type="submit" variant="primary" className="px-5 cursor-pointer shrink-0">
               <Send size={16} />
