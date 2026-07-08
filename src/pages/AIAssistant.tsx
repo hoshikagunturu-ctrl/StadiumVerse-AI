@@ -150,7 +150,7 @@ export const AIAssistant: React.FC = () => {
           <CardHeader className="bg-slate-50/50 dark:bg-white/5 border-b border-slate-100 py-3 flex items-center justify-between">
             <CardTitle className="text-sm uppercase tracking-wider text-primary flex items-center gap-2">
               <Sparkles size={16} className="text-secondary animate-pulse-glow" />
-              🚀 GEMINI TEST 123
+              Simulated Stadium Brain Feed
             </CardTitle>
             <Badge variant="primary" className="border-primary/20">Operational Concierge</Badge>
           </CardHeader>
