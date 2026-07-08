@@ -76,7 +76,9 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   return (
     <div className={`min-h-screen flex flex-col ${highContrast ? 'dark bg-black' : 'bg-slate-50'}`}>
-      {/* Broadcast LED Ticker Ribbon */}
+      {/* Sticky Header Wrapper to resolve white scrolling gap globally */}
+      <div className="sticky top-0 z-40 w-full bg-primary">
+        {/* Broadcast LED Ticker Ribbon */}
       <div 
         className="w-full bg-primary text-white text-xs h-7 overflow-hidden flex items-center font-bold uppercase tracking-wider relative border-b border-secondary/20 z-50 shadow-sm"
         role="region" 
@@ -103,8 +105,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         </div>
       </div>
 
-      {/* Broadcast Top Nav Header */}
-      <header className="bg-primary text-white shadow-lg broadcast-border z-40 sticky top-0">
+        {/* Broadcast Top Nav Header */}
+        <header className="bg-primary text-white shadow-lg broadcast-border">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button 
@@ -244,12 +246,13 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           </div>
         </div>
       </header>
+      </div>
 
       {/* Main Grid Wrapper */}
       <div className="flex-1 flex max-w-8xl w-full mx-auto relative">
         {/* Navigation Sidebar (Desktop) */}
         <aside className={`
-          fixed md:sticky top-16 md:top-23 left-0 h-[calc(100vh-64px)] md:h-[calc(100vh-92px)] w-64 bg-primary text-white border-r border-white/5 py-6 px-4 overflow-y-auto shrink-0 z-30 transition-transform duration-300
+          fixed md:sticky top-23 left-0 h-[calc(100vh-92px)] w-64 bg-primary text-white border-r border-white/5 py-6 px-4 overflow-y-auto shrink-0 z-30 transition-transform duration-300
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
         `}>
           <nav className="flex flex-col gap-6" aria-label="Main Navigation">

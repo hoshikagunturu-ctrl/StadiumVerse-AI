@@ -29,10 +29,12 @@ import { FanInsightCard } from '../components/FanInsightCard';
 import { AccessibilityStatusCard } from '../components/AccessibilityStatusCard';
 import { SustainabilityMetricCard } from '../components/SustainabilityMetricCard';
 import { NotificationItem } from '../components/NotificationItem';
+import { useTranslation } from '../hooks/useTranslation';
 
 export const LandingPage: React.FC = () => {
   const { speak } = useAccessibility();
   const { login } = useUserRole();
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   // Simulated live operations counters
@@ -238,15 +240,15 @@ export const LandingPage: React.FC = () => {
           {/* Current Match */}
           <Card className="border border-slate-100 dark:border-white/10 shadow-md bg-white dark:bg-stadium-dark">
             <CardContent className="p-5 flex flex-col justify-between h-full">
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">⚽ Current Match</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">⚽ {t("Current Match")}</span>
               <div className="mt-3 flex items-center justify-between">
-                <span className="text-base font-extrabold text-primary dark:text-white">Brazil</span>
-                <span className="text-xs font-bold text-slate-400 uppercase">vs</span>
-                <span className="text-base font-extrabold text-primary dark:text-white">Japan</span>
+                <span className="text-base font-extrabold text-primary dark:text-white">{t("Brazil")}</span>
+                <span className="text-xs font-bold text-slate-400 uppercase">{t("vs")}</span>
+                <span className="text-base font-extrabold text-primary dark:text-white">{t("Japan")}</span>
               </div>
               <div className="mt-4 flex items-center justify-between border-t border-slate-50 dark:border-white/5 pt-2 text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase">
-                <span>Group Stage</span>
-                <Badge variant="success" className="animate-pulse">{matchTime}' In-Play</Badge>
+                <span>{t("Group Stage")}</span>
+                <Badge variant="success" className="animate-pulse">{matchTime}' {t("In-Play")}</Badge>
               </div>
             </CardContent>
           </Card>
@@ -254,75 +256,75 @@ export const LandingPage: React.FC = () => {
           {/* Stadium */}
           <Card className="border border-slate-100 dark:border-white/10 shadow-md bg-white dark:bg-stadium-dark">
             <CardContent className="p-5 flex flex-col justify-between h-full">
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">🏟 Stadium</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">🏟 {t("Stadium")}</span>
               <div className="mt-3">
-                <span className="text-sm font-extrabold text-primary dark:text-white block">Lusail Stadium</span>
-                <span className="text-[9px] text-slate-500 dark:text-slate-400 block mt-0.5">Doha, Qatar</span>
+                <span className="text-sm font-extrabold text-primary dark:text-white block">{t("Lusail Stadium")}</span>
+                <span className="text-[9px] text-slate-500 dark:text-slate-400 block mt-0.5">{t("Doha, Qatar")}</span>
               </div>
-              <span className="text-[9px] text-slate-500 dark:text-slate-400 font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">Host Venue</span>
+              <span className="text-[9px] text-slate-500 dark:text-slate-400 font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">{t("Host Venue")}</span>
             </CardContent>
           </Card>
 
           {/* Attendance */}
           <Card className="border border-slate-100 dark:border-white/10 shadow-md bg-white dark:bg-stadium-dark">
             <CardContent className="p-5 flex flex-col justify-between h-full">
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">👥 Attendance</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">👥 {t("Attendance")}</span>
               <div className="mt-3">
                 <span className="text-sm font-extrabold text-primary dark:text-white block font-display">{attendance.toLocaleString()}</span>
-                <span className="text-[9px] text-slate-500 dark:text-slate-400 block mt-0.5">/ 85,000 max</span>
+                <span className="text-[9px] text-slate-500 dark:text-slate-400 block mt-0.5">/ {t("85,000 max")}</span>
               </div>
-              <span className="text-[9px] text-green-600 dark:text-accent-light font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">97% Capacity</span>
+              <span className="text-[9px] text-green-600 dark:text-accent-light font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">{t("97% Capacity")}</span>
             </CardContent>
           </Card>
 
           {/* Weather */}
           <Card className="border border-slate-100 dark:border-white/10 shadow-md bg-white dark:bg-stadium-dark">
             <CardContent className="p-5 flex flex-col justify-between h-full">
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">🌦 Weather</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">🌦 {t("Weather")}</span>
               <div className="mt-3 flex items-center gap-1.5">
                 <Thermometer size={16} className="text-secondary shrink-0" />
                 <div>
                   <span className="text-sm font-extrabold text-primary dark:text-white block">{stadiumTemp}°C</span>
-                  <span className="text-[9px] text-slate-500 dark:text-slate-400 block mt-0.5">Clear Sky</span>
+                  <span className="text-[9px] text-slate-500 dark:text-slate-400 block mt-0.5">{t("Clear Sky")}</span>
                 </div>
               </div>
-              <span className="text-[9px] text-slate-500 dark:text-slate-400 font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">Cooling grid on</span>
+              <span className="text-[9px] text-slate-500 dark:text-slate-400 font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">{t("Cooling grid on")}</span>
             </CardContent>
           </Card>
 
           {/* Gate 4 Queue */}
           <Card className="border border-slate-100 dark:border-white/10 shadow-md bg-white dark:bg-stadium-dark">
             <CardContent className="p-5 flex flex-col justify-between h-full">
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">🚪 Gate 4 Queue</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">🚪 {t("Gate 4 Queue")}</span>
               <div className="mt-3 flex items-center justify-between">
-                <span className="text-sm font-extrabold text-primary dark:text-white">Medium Flow</span>
-                <Badge variant="warning">{gate4Queue} Mins</Badge>
+                <span className="text-sm font-extrabold text-primary dark:text-white">{t("Medium Flow")}</span>
+                <Badge variant="warning">{gate4Queue} {t("Mins")}</Badge>
               </div>
-              <span className="text-[9px] text-slate-500 dark:text-slate-400 font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">Entrance Gate</span>
+              <span className="text-[9px] text-slate-500 dark:text-slate-400 font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">{t("Entrance Gate")}</span>
             </CardContent>
           </Card>
 
           {/* Emergency Status */}
           <Card className="border border-slate-100 dark:border-white/10 shadow-md bg-white dark:bg-stadium-dark">
             <CardContent className="p-5 flex flex-col justify-between h-full">
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">🚨 Emergency Status</span>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase block tracking-wider">🚨 {t("Emergency Status")}</span>
               <div className="mt-3 flex items-center gap-2">
                 <CheckCircle size={16} className="text-accent dark:text-accent-light shrink-0" />
-                <span className="text-xs font-bold text-accent dark:text-accent-light uppercase tracking-wider">No Active Alerts</span>
+                <span className="text-xs font-bold text-accent dark:text-accent-light uppercase tracking-wider">{t("No Active Alerts")}</span>
               </div>
-              <span className="text-[9px] text-slate-500 dark:text-slate-400 font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">EMT Standby</span>
+              <span className="text-[9px] text-slate-500 dark:text-slate-400 font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">{t("EMT Standby")}</span>
             </CardContent>
           </Card>
 
           {/* Metro Status */}
           <Card className="border border-slate-100 dark:border-white/10 shadow-md bg-white dark:bg-stadium-dark">
             <CardContent className="p-5 flex flex-col justify-between h-full">
-              <span className="text-[10px] text-slate-400 font-bold uppercase block tracking-wider">🚆 Metro Status</span>
+              <span className="text-[10px] text-slate-400 font-bold uppercase block tracking-wider">🚆 {t("Metro Status")}</span>
               <div className="mt-3 flex items-center gap-2">
                 <CheckCircle size={16} className="text-accent dark:text-accent-light shrink-0" />
-                <span className="text-xs font-bold text-accent dark:text-accent-light uppercase tracking-wider">Running Normally</span>
+                <span className="text-xs font-bold text-accent dark:text-accent-light uppercase tracking-wider">{t("Running Normally")}</span>
               </div>
-              <span className="text-[9px] text-slate-400 font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">Green/Red Lines</span>
+              <span className="text-[9px] text-slate-400 font-bold block uppercase border-t border-slate-50 dark:border-white/5 pt-2">{t("Green/Red Lines")}</span>
             </CardContent>
           </Card>
 
@@ -334,11 +336,11 @@ export const LandingPage: React.FC = () => {
               </div>
               <div className="space-y-1 text-left flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-[9px] font-bold text-primary dark:text-secondary uppercase tracking-wider block">AI Operational Advisory</span>
-                  <Badge variant="danger" className="text-[8px]">94% Confidence</Badge>
+                  <span className="text-[9px] font-bold text-primary dark:text-secondary uppercase tracking-wider block">{t("AI Operational Advisory")}</span>
+                  <Badge variant="danger" className="text-[8px]">{t("94% Confidence")}</Badge>
                 </div>
                 <p className="text-slate-800 dark:text-white font-extrabold text-xs md:text-sm leading-relaxed mt-1">
-                  "AI predicts Gate 4 congestion within the next 12 minutes. Suggested action: Redirect arriving fans to Gate 6 bypass corridor immediately."
+                  "{t("AI predicts Gate 4 congestion within the next 12 minutes. Suggested action: Redirect arriving fans to Gate 6 bypass corridor immediately.")}"
                 </p>
               </div>
             </CardContent>
