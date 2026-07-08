@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+@variant dark (.dark &);
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  --color-primary: #0C2340;      /* Deep Royal Blue */
+  --color-primary-light: #163660;
+  --color-primary-dark: #061224;
+  --color-secondary: #D4AF37;    /* Trophy Gold */
+  --color-secondary-light: #E5C352;
+  --color-secondary-dark: #BA9726;
+  --color-accent: #00843D;       /* Emerald Green */
+  --color-accent-light: #00A34B;
+  --color-accent-dark: #00662E;
+  
+  --color-stadium-dark: #050E1A;
+  --color-stadium-pitch: #0B2B1B;
+  --color-neon-blue: #00F0FF;
+  --color-neon-gold: #FFD700;
+  
+  --animate-pulse-glow: pulse-glow 3s infinite ease-in-out;
+  --animate-scan: scan 6s infinite linear;
+  --animate-ticker: ticker 25s infinite linear;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.3;
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.4));
+  }
+  50% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+  }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background-color: #F8FAFC;
+  color: #1E293B;
+  overflow-x: hidden;
+}
+
+/* Custom Utilities for Stadium Design Aesthetic */
+
+/* Pitch grass stripes background effect */
+.bg-pitch-stripes {
+  background-color: #00843D;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 100px,
+    transparent 100px,
+    transparent 200px
+  );
+}
+
+.bg-pitch-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* Stadium lighting background glow */
+.bg-stadium-lights {
+  background: 
+    radial-gradient(circle at 10% 10%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(0, 132, 61, 0.06) 0%, transparent 50%),
+    #050E1A;
+}
+
+.bg-stadium-lights-light {
+  background: 
+    radial-gradient(circle at 10% 0%, rgba(12, 35, 64, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 90% 100%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+    #F8FAFC;
+}
+
+/* Broadcast status header */
+.broadcast-border {
+  border-bottom: 3px solid #D4AF37;
+  position: relative;
+}
+.broadcast-border::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #D4AF37 0%, #00843D 50%, #0C2340 100%);
+  z-index: 10;
+}
+
+/* Glassmorphism containers */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-panel-dark {
+  background: rgba(12, 35, 64, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Focus styles for keyboard accessibility */
+*:focus-visible {
+  outline: 3px solid #D4AF37;
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #050E1A;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #1E293B;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Custom typography settings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+}
