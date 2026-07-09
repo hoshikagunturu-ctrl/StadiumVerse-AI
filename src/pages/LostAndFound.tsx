@@ -5,9 +5,11 @@ import { Input } from '../components/ui/Input';
 import { Badge } from '../components/ui/Badge';
 import { useAccessibility } from '../context/AccessibilityContext';
 import { PlusCircle, MapPin, Tag } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 export const LostAndFound: React.FC = () => {
   const { speak } = useAccessibility();
+  const { t } = useTranslation();
   const [items, setItems] = useState([
     { id: 'LF-12', name: 'Black iPhone 15 Pro', loc: 'Section 104 Row M', status: 'In Custody (East Depot)', date: 'Today, 17:30' },
     { id: 'LF-09', name: 'Brown Leather Wallet', loc: 'Gate G Entrance', status: 'Claimed', date: 'Today, 16:15' },
@@ -31,7 +33,7 @@ export const LostAndFound: React.FC = () => {
       date: 'Just Now'
     };
     setItems([newItem, ...items]);
-    setSubmittedMessage(`✅ Report logged under reference: ${ref}. Dispatched to sector volunteers.`);
+    setSubmittedMessage(`${t("Report logged under reference")}: ${ref}. ${t("Dispatched to sector volunteers.")}`);
     speak(`Item report submitted for ${itemName} at ${itemLoc}. Reference number ${ref}`);
     setItemName('');
     setItemLoc('');
@@ -42,10 +44,10 @@ export const LostAndFound: React.FC = () => {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-extrabold text-primary dark:text-white uppercase font-display leading-tight">
-          Lost & Found Registry
+          {t("Lost & Found Registry")}
         </h2>
         <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">
-          Log lost items and check stadium repository depots
+          {t("Log lost items and check stadium repository depots")}
         </p>
       </div>
 
@@ -56,34 +58,34 @@ export const LostAndFound: React.FC = () => {
           <CardHeader className="bg-slate-50/50 dark:bg-white/5 border-b border-slate-100">
             <CardTitle className="text-xs uppercase tracking-wider text-primary">
               <PlusCircle size={16} className="text-secondary" />
-              File Loss Incident
+              {t("File Loss Incident")}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-5 space-y-4">
             <form onSubmit={handleSubmitReport} className="space-y-3.5">
               <Input 
-                label="Item Name / Category"
+                label={t("Item Name / Category")}
                 value={itemName}
                 onChange={(e) => setItemName(e.target.value)}
-                placeholder="e.g. Car keys, Black backpack..."
+                placeholder={t("e.g. Car keys, Black backpack...")}
                 required
               />
               <Input 
-                label="Approximate Loss Location"
+                label={t("Approximate Loss Location")}
                 value={itemLoc}
                 onChange={(e) => setItemLoc(e.target.value)}
-                placeholder="e.g. Row M Seat 18, Concession B..."
+                placeholder={t("e.g. Row M Seat 18, Concession B...")}
                 required
               />
               <Input 
-                label="Description & Contact info"
+                label={t("Description & Contact info")}
                 value={itemDesc}
                 onChange={(e) => setItemDesc(e.target.value)}
-                placeholder="e.g. Blue keychain, phone number..."
+                placeholder={t("e.g. Blue keychain, phone number...")}
               />
               
               <Button type="submit" variant="primary" fullWidth className="text-xs font-bold uppercase tracking-wider">
-                SUBMIT REPORT
+                {t("SUBMIT REPORT")}
               </Button>
             </form>
 
@@ -95,14 +97,14 @@ export const LostAndFound: React.FC = () => {
           </CardContent>
         </Card>
 
-        {/* Found Items Logs */}
+         {/* Found Items Logs */}
         <Card className="lg:col-span-2 border border-slate-100 shadow-md">
           <CardHeader className="bg-slate-50/50 dark:bg-white/5 border-b border-slate-100 p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <CardTitle className="text-sm uppercase tracking-wider text-primary">
               <Tag size={16} className="text-secondary" />
-              Active Depots Inventory
+              {t("Active Depots Inventory")}
             </CardTitle>
-            <Badge variant="primary" className="border-primary/20">3 Items Logged Today</Badge>
+            <Badge variant="primary" className="border-primary/20">{t("3 Items Logged Today")}</Badge>
           </CardHeader>
           
           <CardContent className="p-5">
@@ -111,19 +113,19 @@ export const LostAndFound: React.FC = () => {
                 <div key={item.id} className="p-3 bg-white dark:bg-white/5 border border-slate-100 dark:border-white/5 rounded-xl shadow-sm hover:scale-[1.01] duration-200 text-xs font-semibold text-left flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="font-extrabold text-primary dark:text-white uppercase">{item.name}</span>
+                      <span className="font-extrabold text-primary dark:text-white uppercase">{t(item.name)}</span>
                       <span className="text-[10px] text-slate-400 font-bold">({item.id})</span>
                     </div>
                     <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
                       <MapPin size={12} className="text-secondary" />
-                      <span>{item.loc}</span>
+                      <span>{t(item.loc)}</span>
                     </div>
-                    <div className="text-[10px] text-slate-400 font-bold uppercase">Logged: {item.date}</div>
+                    <div className="text-[10px] text-slate-400 font-bold uppercase">{t("Logged")}: {t(item.date)}</div>
                   </div>
                   
                   <div className="flex items-center gap-3 ml-auto sm:ml-0">
                     <Badge variant={item.status.includes('Custody') ? 'warning' : item.status === 'Claimed' ? 'success' : 'info'}>
-                      {item.status}
+                      {t(item.status)}
                     </Badge>
                     {item.status.includes('Custody') && (
                       <Button 
@@ -135,7 +137,7 @@ export const LostAndFound: React.FC = () => {
                         }}
                         className="text-[10px] uppercase font-bold py-1 h-7"
                       >
-                        Claim
+                        {t("Claim")}
                       </Button>
                     )}
                   </div>
