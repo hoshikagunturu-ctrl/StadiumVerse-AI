@@ -2,8 +2,6 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { geminiService } from '../services/gemini';
 
 describe('geminiService', () => {
-  const originalEnv = import.meta.env;
-
   beforeEach(() => {
     vi.resetModules();
     vi.stubGlobal('fetch', vi.fn());

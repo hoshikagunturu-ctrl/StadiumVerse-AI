@@ -33,7 +33,7 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     if (saved) {
       try {
         return { ...defaultSettings, ...JSON.parse(saved) };
-      } catch (e) {
+      } catch {
         return defaultSettings;
       }
     }
