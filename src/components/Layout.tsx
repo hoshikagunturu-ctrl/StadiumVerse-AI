@@ -89,19 +89,19 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           <span>LIVE BROADCAST FEED</span>
         </div>
         <div className="flex items-center gap-8 whitespace-nowrap animate-ticker pl-4 select-none">
-          <span>🏆 FIFA WORLD CUP 2026 OFFICIAL OPERATIONS PANEL</span>
+          <span>🏆 {t("FIFA WORLD CUP 2026 OFFICIAL OPERATIONS PANEL")}</span>
           <span className="text-secondary">•</span>
-          <span>⚽ MATCH 48 LIVE: ARGENTINA 2 - 1 BRAZIL (82')</span>
+          <span>⚽ {t("MATCH 48 LIVE: ARGENTINA 2 - 1 BRAZIL (82')")}</span>
           <span className="text-secondary">•</span>
-          <span>🚆 METRO SYSTEM: GREEN LINE RUNNING AT 3-MINUTE SHIFT FREQUENCY</span>
+          <span>🚆 {t("METRO SYSTEM: GREEN LINE RUNNING AT 3-MINUTE SHIFT FREQUENCY")}</span>
           <span className="text-secondary">•</span>
-          <span>🍔 FOOD CONCESSION B: WAIT TIME 5 MINS (ECO REWARD REDEMPTION AVAILABLE)</span>
+          <span>🍔 {t("FOOD CONCESSION B: WAIT TIME 5 MINS (ECO REWARD REDEMPTION AVAILABLE)")}</span>
           <span className="text-secondary">•</span>
-          <span>🚨 WEATHER ADVISORY: 22°C STADIUM COOLING ACTIVE</span>
+          <span>🚨 {t("WEATHER ADVISORY: 22°C STADIUM COOLING ACTIVE")}</span>
           <span className="text-secondary">•</span>
-          <span>💡 VOLUNTEERS: MOBILITY MOBILIZATION REPORT TO GATE G IMMEDIATELY</span>
+          <span>💡 {t("VOLUNTEERS: MOBILITY MOBILIZATION REPORT TO GATE G IMMEDIATELY")}</span>
           <span className="text-secondary">•</span>
-          <span>🏆 FIFA WORLD CUP 2026 OFFICIAL OPERATIONS PANEL</span>
+          <span>🏆 {t("FIFA WORLD CUP 2026 OFFICIAL OPERATIONS PANEL")}</span>
         </div>
       </div>
 
@@ -185,7 +185,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                   />
                   <div className="text-left hidden md:block">
                     <div className="text-xs font-bold leading-none">{user.name}</div>
-                    <div className="text-[10px] font-bold text-secondary uppercase tracking-widest">{user.role} console</div>
+                    <div className="text-[10px] font-bold text-secondary uppercase tracking-widest">{t(user.role + " console")}</div>
                   </div>
                   <ChevronDown size={14} className="text-white/60" />
                 </button>
@@ -198,7 +198,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                       role="menu"
                     >
                       <div className="px-4 py-2">
-                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Switch System Console</p>
+                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">{t("Switch System Console")}</p>
                         <div className="flex flex-col gap-1 mt-1.5">
                           {(['fan', 'volunteer', 'organizer'] as UserRole[]).map((r) => (
                             <button
@@ -210,7 +210,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                                   : 'hover:bg-slate-100 text-slate-700'
                               }`}
                             >
-                              <span>{r === 'fan' ? 'Fan Hub' : r === 'volunteer' ? 'Volunteer' : 'Operations Command'}</span>
+                              <span>{r === 'fan' ? t('Fan Hub') : r === 'volunteer' ? t('Volunteer Grid') : t('Operations Command')}</span>
                               {user.role === r && <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>}
                             </button>
                           ))}
@@ -227,7 +227,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                           className="w-full text-left px-3 py-2 text-xs font-bold text-red-600 hover:bg-red-50 hover:text-red-700 rounded flex items-center gap-2 cursor-pointer"
                         >
                           <LogOut size={14} />
-                          <span>DISCONNECT PORTAL</span>
+                          <span>{t("DISCONNECT PORTAL")}</span>
                         </button>
                       </div>
                     </div>
@@ -240,7 +240,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 className="bg-secondary text-primary text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-lg hover:bg-secondary-light transition-all border-b-2 border-secondary-dark"
                 onClick={() => speak("Navigated to Login Console")}
               >
-                CONNECT
+                {t("CONNECT")}
               </Link>
             )}
           </div>
@@ -312,12 +312,12 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       {settings.evacuationMode && (
         <div className="fixed inset-x-0 top-7 bg-red-600 text-white font-bold text-center py-2 flex items-center justify-center gap-3 z-50 animate-pulse uppercase tracking-wider text-xs border-y border-red-700">
           <ShieldAlert size={16} />
-          <span>EVACUATION DRILL ACTIVE - FOLLOW GREEN LIGHT PATHWAY DIRECTIVES TO NEAREST EMERGENCY GATES</span>
+          <span>{t("EVACUATION DRILL ACTIVE - FOLLOW GREEN LIGHT PATHWAY DIRECTIVES TO NEAREST EMERGENCY GATES")}</span>
           <button 
             onClick={() => updateSetting('evacuationMode', false)}
             className="bg-white/20 hover:bg-white/30 text-white text-[10px] px-2 py-0.5 rounded cursor-pointer border border-white/30"
           >
-            DISMISS
+            {t("DISMISS")}
           </button>
         </div>
       )}
@@ -325,11 +325,11 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       {/* Footer */}
       <footer className="bg-primary-dark text-white/50 text-xs py-6 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 text-center flex flex-col md:flex-row items-center justify-between gap-4">
-          <p>© 2026 FIFA Operations. StadiumVerse AI. All Rights Reserved.</p>
+          <p>{t("© 2026 FIFA Operations. StadiumVerse AI. All Rights Reserved.")}</p>
           <div className="flex items-center gap-4 font-bold text-[10px] tracking-widest uppercase">
-            <Link to="/accessibility-mode" className="hover:text-white transition-colors">Accessibility Policy</Link>
+            <Link to="/accessibility-mode" className="hover:text-white transition-colors">{t("Accessibility Policy")}</Link>
             <span>•</span>
-            <Link to="/settings" className="hover:text-white transition-colors">Emergency Protocol</Link>
+            <Link to="/settings" className="hover:text-white transition-colors">{t("Emergency Protocol")}</Link>
           </div>
         </div>
       </footer>

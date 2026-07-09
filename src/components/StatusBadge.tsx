@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from '../hooks/useTranslation';
 
 export type BadgeStatus = 'Preparing' | 'Security Check' | 'Ready' | 'Live' | 'Completed';
 
@@ -7,6 +8,7 @@ interface StatusBadgeProps {
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
+  const { t } = useTranslation();
   const styles = {
     'Preparing': 'bg-blue-500/10 text-blue-500 border border-blue-500/20',
     'Security Check': 'bg-amber-500/10 text-amber-500 border border-amber-500/20',
@@ -17,7 +19,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
 
   return (
     <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${styles[status]}`}>
-      {status}
+      {t(status)}
     </span>
   );
 };

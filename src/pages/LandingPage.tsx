@@ -180,7 +180,7 @@ export const LandingPage: React.FC = () => {
           <div className="flex justify-center">
             <Badge variant="secondary" className="flex items-center gap-1.5 py-1.5 px-3.5 border border-secondary/20 font-bold uppercase tracking-widest text-[9px] bg-secondary/10">
               <Tv size={12} className="animate-pulse text-secondary" />
-              <span>StadiumVerse AI Operating Network</span>
+               <span>{t("StadiumVerse AI Operating Network")}</span>
             </Badge>
           </div>
           
@@ -189,11 +189,11 @@ export const LandingPage: React.FC = () => {
           </h1>
           
           <p className="text-slate-300 text-xs md:text-sm font-semibold tracking-wider uppercase">
-            AI-Powered Smart Stadium Platform for FIFA World Cup 2026
+            {t("AI-Powered Smart Stadium Platform for FIFA World Cup 2026")}
           </p>
           
           <p className="text-slate-400 text-xs md:text-sm max-w-xl mx-auto leading-relaxed font-medium">
-            Bridging fan experience and automated venue logistics. Monitor real-time crowd dynamics, dispatch instant emergency assistance, calculate queue telemetry, and offset carbon loads.
+            {t("Bridging fan experience and automated venue logistics. Monitor real-time crowd dynamics, dispatch instant emergency assistance, calculate queue telemetry, and offset carbon loads.")}
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-3.5 pt-4">
@@ -202,7 +202,7 @@ export const LandingPage: React.FC = () => {
               onClick={() => speak("Connecting to operations dashboard console switcher")}
             >
               <Button variant="secondary" size="lg" className="w-full sm:w-auto text-xs tracking-wider uppercase font-bold px-6 border-b-4 border-secondary-dark">
-                AUTHORIZE CONSOLE
+                {t("AUTHORIZE CONSOLE")}
                 <ChevronRight size={14} />
               </Button>
             </Link>
@@ -211,7 +211,7 @@ export const LandingPage: React.FC = () => {
               onClick={() => speak("Opening accessibility scaler settings")}
             >
               <Button variant="outline" size="lg" className="w-full sm:w-auto text-xs tracking-wider text-white border-white/20 hover:bg-white/10 hover:border-white">
-                ACCESSIBILITY OPTIONS
+                {t("ACCESSIBILITY OPTIONS")}
               </Button>
             </Link>
           </div>
@@ -223,15 +223,15 @@ export const LandingPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <div>
             <Badge variant="success" className="mb-1 py-0.5 px-2 bg-green-500/10 text-green-500 font-bold uppercase tracking-widest text-[9px]">
-              Live telemetry feed
+              {t("Live telemetry feed")}
             </Badge>
             <h2 className="text-lg md:text-xl font-extrabold text-primary dark:text-secondary uppercase tracking-wider font-display">
-              Live Match Operations Center
+              {t("Live Match Operations Center")}
             </h2>
           </div>
           <span className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
             <span className="w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
-            Live Stream Active
+            {t("Live Stream Active")}
           </span>
         </div>
 
@@ -354,15 +354,15 @@ export const LandingPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <div>
             <Badge variant="primary" className="mb-1 py-0.5 px-2 bg-primary/10 text-primary dark:text-secondary font-bold uppercase tracking-widest text-[9px]">
-              Decision advisory grid
+              {t("Decision advisory grid")}
             </Badge>
             <h2 className="text-lg md:text-xl font-extrabold text-primary dark:text-secondary uppercase tracking-wider font-display">
-              AI Operational Intelligence
+              {t("AI Operational Intelligence")}
             </h2>
           </div>
           <span className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
-            Last Updated: {lastUpdatedTime}
+            {t("Last Updated")}: {lastUpdatedTime}
           </span>
         </div>
 
@@ -443,10 +443,10 @@ export const LandingPage: React.FC = () => {
       <section className="space-y-6 text-left">
         <div>
           <Badge variant="primary" className="mb-1 py-0.5 px-2 bg-primary/10 text-primary dark:text-secondary font-bold uppercase tracking-widest text-[9px]">
-            Operations Console
+            {t("Operations Console")}
           </Badge>
           <h2 className="text-lg md:text-xl font-extrabold text-primary dark:text-secondary uppercase tracking-wider font-display">
-            Tournament Command Dashboard
+            {t("Tournament Command Dashboard")}
           </h2>
         </div>
 
@@ -653,10 +653,10 @@ export const LandingPage: React.FC = () => {
       <section className="space-y-6 text-left">
         <div>
           <Badge variant="primary" className="mb-1 py-0.5 px-2 bg-primary/10 text-primary dark:text-secondary font-bold uppercase tracking-widest text-[9px]">
-            Incident Desk
+            {t("Incident Desk")}
           </Badge>
           <h2 className="text-lg md:text-xl font-extrabold text-primary dark:text-secondary uppercase tracking-wider font-display">
-            AI Incident Response Center
+            {t("AI Incident Response Center")}
           </h2>
         </div>
 
@@ -726,17 +726,17 @@ export const LandingPage: React.FC = () => {
       <section className="space-y-8 text-left animate-fade-in">
         <div>
           <Badge variant="primary" className="mb-1 py-0.5 px-2 bg-primary/10 text-primary dark:text-secondary font-bold uppercase tracking-widest text-[9px]">
-            Future Operations
+            {t("Future Operations")}
           </Badge>
           <h2 className="text-lg md:text-xl font-extrabold text-primary dark:text-secondary uppercase tracking-wider font-display">
-            Predictive Intelligence & Stadium Digital Twin
+            {t("Predictive Intelligence & Stadium Digital Twin")}
           </h2>
         </div>
 
         {/* SECTION 1 — Predictive Intelligence Grid */}
         <div className="space-y-4">
           <h3 className="text-xs font-extrabold text-slate-400 dark:text-slate-300 uppercase tracking-wider">
-            Predictive Intelligence Forecasts
+            {t("Predictive Intelligence Forecasts")}
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
             {mockForecasts.map((forecast) => (
@@ -751,7 +751,7 @@ export const LandingPage: React.FC = () => {
           {/* SECTION 2 — Stadium Digital Twin Map (7 columns) */}
           <div className="lg:col-span-7 flex flex-col space-y-4">
             <h3 className="text-xs font-extrabold text-slate-400 dark:text-slate-300 uppercase tracking-wider">
-              Stadium Digital Twin Area Map
+              {t("Stadium Digital Twin Area Map")}
             </h3>
             
             {/* HTML/CSS map representation */}
@@ -774,7 +774,7 @@ export const LandingPage: React.FC = () => {
                       : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10 hover:text-white'
                   }`}
                 >
-                  👮 Security HQ
+                  👮 {t("Security HQ")}
                 </button>
 
                 {/* North Stand */}
@@ -789,7 +789,7 @@ export const LandingPage: React.FC = () => {
                       : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10 hover:text-white'
                   }`}
                 >
-                  North Stand (Caution)
+                  {t("North Stand (Caution)")}
                 </button>
 
                 {/* Medical Clinic */}
@@ -804,7 +804,7 @@ export const LandingPage: React.FC = () => {
                       : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10 hover:text-white'
                   }`}
                 >
-                  🏥 Medical Clinic
+                  🏥 {t("Medical Clinic")}
                 </button>
               </div>
 
@@ -822,7 +822,7 @@ export const LandingPage: React.FC = () => {
                       : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10 hover:text-white'
                   }`}
                 >
-                  West Stand
+                  {t("West Stand")}
                 </button>
 
                 {/* Central Pitch / Field Representation */}
@@ -833,7 +833,7 @@ export const LandingPage: React.FC = () => {
                     <div className="absolute w-[1px] h-full bg-accent/25" />
                     <div className="w-1.5 h-1.5 bg-accent/40 rounded-full" />
                   </div>
-                  <span className="absolute bottom-2 text-[8px] text-accent/35 font-extrabold uppercase tracking-wider">Lusail Arena</span>
+                  <span className="absolute bottom-2 text-[8px] text-accent/35 font-extrabold uppercase tracking-wider">{t("Lusail Arena")}</span>
                 </div>
 
                 {/* East Stand */}
@@ -848,7 +848,7 @@ export const LandingPage: React.FC = () => {
                       : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10 hover:text-white'
                   }`}
                 >
-                  East Stand
+                  {t("East Stand")}
                 </button>
               </div>
 
@@ -866,7 +866,7 @@ export const LandingPage: React.FC = () => {
                       : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10 hover:text-white'
                   }`}
                 >
-                  🚗 Parking Zone B
+                  🚗 {t("Parking Zone B")}
                 </button>
 
                 {/* South Stand */}
@@ -881,7 +881,7 @@ export const LandingPage: React.FC = () => {
                       : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10 hover:text-white'
                   }`}
                 >
-                  South Stand
+                  {t("South Stand")}
                 </button>
 
                 {/* VIP Stand Suite */}
@@ -896,7 +896,7 @@ export const LandingPage: React.FC = () => {
                       : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10 hover:text-white'
                   }`}
                 >
-                  👑 VIP Suites
+                  👑 {t("VIP Suites")}
                 </button>
               </div>
 

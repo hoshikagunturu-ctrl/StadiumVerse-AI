@@ -1,5 +1,6 @@
 import React from 'react';
 import { Check } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface TimelineItemProps {
   label: string;
@@ -14,6 +15,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
   completed,
   isLast = false,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="flex gap-4 text-xs font-semibold relative select-none">
       {/* Node indicator */}
@@ -33,7 +35,7 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
       {/* Content description */}
       <div className="pb-4 space-y-1">
         <h5 className={`font-extrabold uppercase tracking-wide ${completed ? 'text-primary dark:text-white' : 'text-slate-400'}`}>
-          {label}
+          {t(label)}
         </h5>
         <span className="text-[9px] text-slate-400 font-bold block">{time}</span>
       </div>

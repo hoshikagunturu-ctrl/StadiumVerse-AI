@@ -57,6 +57,8 @@ export const geminiService = {
       contentsBody = contents;
     }
 
+    console.log("[Gemini API] Outgoing Request Payload:", JSON.stringify({ contents: contentsBody }, null, 2));
+
     try {
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
@@ -71,13 +73,17 @@ export const geminiService = {
         }
       );
 
+      console.log("[Gemini API] HTTP Status Code:", response.status);
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
+        console.error("[Gemini API] Error Response Data:", JSON.stringify(errorData, null, 2));
         const errMsg = errorData?.error?.message || `HTTP error! Status: ${response.status}`;
         throw new Error(errMsg);
       }
 
       const data = await response.json();
+      console.log("[Gemini API] Successful Response Data:", JSON.stringify(data, null, 2));
       const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
       if (!text) {
@@ -87,7 +93,7 @@ export const geminiService = {
       return { text };
     } catch (err: any) {
       const errMsg = err.message || 'Unknown network error occurred.';
-      console.error("[Gemini API] Error:", errMsg);
+      console.error("[Gemini API] Exception Error:", errMsg);
       return {
         text: '',
         error: `API Communication Error: ${errMsg}`

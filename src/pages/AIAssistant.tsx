@@ -47,23 +47,6 @@ export const AIAssistant: React.FC = () => {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const getSimulatedResponse = (query: string): string => {
-    const q = query.toLowerCase();
-    if (q.includes('section') || q.includes('seat') || q.includes('row')) {
-      return `According to your digital ticket profile, your seat is Section 104, Row M, Seat 18. You should enter through Gate G (North Entrance), take the escalators to Level 2, and proceed to Corridor 4.`;
-    }
-    if (q.includes('concession') || q.includes('wait') || q.includes('food') || q.includes('queue')) {
-      return `Concession Stand B (Vegan Options) is currently the most optimal dining choice with a short 5-minute wait time. Concession C has an 18-minute line. You can order in advance via the Gourmet Eats tab!`;
-    }
-    if (q.includes('first-aid') || q.includes('medical') || q.includes('emergency') || q.includes('exits')) {
-      return `The closest first-aid block to Section 104 is First Aid East, located just behind section 103 on Level 1. In case of evacuation, your nearest exit is Exit Gate A.`;
-    }
-    if (q.includes('carbon') || q.includes('recycle') || q.includes('eco') || q.includes('points')) {
-      return `You can log eco points by recycling bottles at any Smart Eco Bin located in corridors 101 and 104. Use the Eco Rewards console to log actions and redeem food vouchers!`;
-    }
-    return `That is a great question. For this simulation: the match is live (ARG 2-1 BRA 82'). Please check the operations panel tabs for interactive maps, transit boards, and food pre-orders!`;
-  };
-
   const handleSendMessage = async (textToSend: string) => {
     if (!textToSend.trim()) return;
 
@@ -73,19 +56,53 @@ export const AIAssistant: React.FC = () => {
     setIsTyping(true);
     speak(`You asked: ${textToSend}`);
 
-    // Map conversation history including the new prompt
-    const history: GeminiContent[] = messages.map(msg => ({
-      role: msg.sender === 'user' ? 'user' : 'model',
-      parts: [{ text: msg.text }]
-    }));
+    // Map conversation history, excluding error messages, and including the new prompt
+    const history: GeminiContent[] = messages
+      .filter(msg => !msg.text.startsWith('⚠️ **Gemini API Error:**'))
+      .map(msg => ({
+        role: (msg.sender === 'user' ? 'user' : 'model') as 'user' | 'model',
+        parts: [{ text: msg.text }]
+      }));
     
     history.push({
       role: 'user',
       parts: [{ text: textToSend }]
     });
 
+    // Clean history: Filter out the initial welcome greeting if it has 'model' role as the first item
+    const cleanHistory = history.filter((item, index) => {
+      if (index === 0 && item.role === 'model') {
+        return false;
+      }
+      return true;
+    });
+
+    // Ensure strict alternation of user and model roles as required by Gemini API.
+    // If consecutive turns have the same role (e.g. after a previous failed request), merge them.
+    const alternatingHistory: GeminiContent[] = [];
+    for (const item of cleanHistory) {
+      if (alternatingHistory.length === 0) {
+        if (item.role === 'user') {
+          alternatingHistory.push({
+            role: item.role,
+            parts: [{ text: item.parts[0].text }]
+          });
+        }
+      } else {
+        const lastItem = alternatingHistory[alternatingHistory.length - 1];
+        if (lastItem.role === item.role) {
+          lastItem.parts[0].text += "\n\n" + item.parts[0].text;
+        } else {
+          alternatingHistory.push({
+            role: item.role,
+            parts: [{ text: item.parts[0].text }]
+          });
+        }
+      }
+    }
+
     try {
-      const response = await geminiService.generateContent(history);
+      const response = await geminiService.generateContent(alternatingHistory);
       const responseTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       
       if (response.text && !response.error) {
@@ -93,21 +110,21 @@ export const AIAssistant: React.FC = () => {
         setMessages(prev => [...prev, { sender: 'ai', text: response.text, time: responseTime }]);
         speak(`AI response: ${response.text}`);
       } else {
-        // Fallback to simulated response when API key is missing or service returns an error
-        const fallbackText = getSimulatedResponse(textToSend);
-        setMessages(prev => [...prev, { sender: 'ai', text: fallbackText, time: responseTime }]);
-        speak(`AI fallback response: ${fallbackText}`);
+        // Render only the complete Gemini error details with NO fallback response
+        const errorText = `⚠️ **Gemini API Error:** ${response.error || 'Failed to fetch response'}`;
+        setMessages(prev => [...prev, { sender: 'ai', text: errorText, time: responseTime }]);
+        speak(`AI error: ${response.error || 'Failed to fetch response'}`);
         
-        console.warn("[AIAssistant] Gemini API returned error, fell back to local simulator:", response.error);
+        console.error("[AIAssistant] Gemini API returned error:", response.error);
       }
-    } catch (error) {
-      // Fallback to simulated response on network exception
+    } catch (error: any) {
+      // Render only the complete network exception error details with NO fallback response
       const responseTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      const fallbackText = getSimulatedResponse(textToSend);
-      setMessages(prev => [...prev, { sender: 'ai', text: fallbackText, time: responseTime }]);
-      speak(`AI fallback response: ${fallbackText}`);
+      const errorText = `⚠️ **Gemini API Error:** ${error?.message || 'Unknown network error'}`;
+      setMessages(prev => [...prev, { sender: 'ai', text: errorText, time: responseTime }]);
+      speak(`AI error: ${error?.message || 'Unknown network error'}`);
       
-      console.error("[AIAssistant] Gemini API fetch threw exception, fell back to local simulator:", error);
+      console.error("[AIAssistant] Gemini API fetch threw exception:", error);
     } finally {
       setIsTyping(false);
     }
@@ -210,7 +227,7 @@ export const AIAssistant: React.FC = () => {
               className="flex-1"
               aria-label={t("Ask AI Stadium Assistant")}
             />
-            <Button type="submit" variant="primary" className="px-5 cursor-pointer shrink-0">
+            <Button type="submit" variant="primary" className="px-5 cursor-pointer shrink-0" aria-label="Send">
               <Send size={16} />
             </Button>
           </form>

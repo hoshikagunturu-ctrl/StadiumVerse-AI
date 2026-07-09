@@ -2,12 +2,14 @@ import React from 'react';
 import type { ForecastItem } from '../data/predictiveData';
 import { Card, CardContent } from './ui/Card';
 import { ArrowUpRight, ArrowDownRight, Minus } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface ForecastCardProps {
   item: ForecastItem;
 }
 
 export const ForecastCard: React.FC<ForecastCardProps> = ({ item }) => {
+  const { t } = useTranslation();
   // Find min/max values for normalizing bar heights
   const values = item.sparklineValues;
   const max = Math.max(...values, 1);
@@ -32,23 +34,23 @@ export const ForecastCard: React.FC<ForecastCardProps> = ({ item }) => {
         {/* Title */}
         <div className="flex justify-between items-start">
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
-            {item.title}
+            {t(item.title)}
           </span>
           <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase ${trendColors[item.trend]}`}>
             {trendIcons[item.trend]}
-            {item.trend}
+            {t(item.trend)}
           </span>
         </div>
 
         {/* Values */}
         <div className="flex justify-between items-baseline">
           <div>
-            <span className="text-[9px] text-slate-400 font-bold block uppercase">Current</span>
-            <span className="text-sm font-extrabold text-slate-700 dark:text-slate-300 font-display">{item.currentValue}</span>
+            <span className="text-[9px] text-slate-400 font-bold block uppercase">{t("Current")}</span>
+            <span className="text-sm font-extrabold text-slate-700 dark:text-slate-300 font-display">{t(item.currentValue.toString())}</span>
           </div>
           <div className="text-right">
-            <span className="text-[9px] text-accent font-bold block uppercase">Predicted</span>
-            <span className="text-sm font-extrabold text-primary dark:text-secondary font-display">{item.predictedValue}</span>
+            <span className="text-[9px] text-accent font-bold block uppercase">{t("Predicted")}</span>
+            <span className="text-sm font-extrabold text-primary dark:text-secondary font-display">{t(item.predictedValue.toString())}</span>
           </div>
         </div>
 
@@ -71,7 +73,7 @@ export const ForecastCard: React.FC<ForecastCardProps> = ({ item }) => {
           </div>
 
           <div className="text-right text-[9px] text-slate-400 font-bold uppercase">
-            <span>🎯 Conf: {item.confidence}</span>
+            <span>🎯 {t("Conf")}: {item.confidence}</span>
           </div>
         </div>
       </CardContent>

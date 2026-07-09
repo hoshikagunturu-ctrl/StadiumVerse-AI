@@ -2,12 +2,14 @@ import React from 'react';
 import type { FanInsight } from '../data/fanSustainabilityData';
 import { Card, CardContent } from './ui/Card';
 import { ArrowUpRight, ArrowDownRight, Minus } from 'lucide-react';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface FanInsightCardProps {
   item: FanInsight;
 }
 
 export const FanInsightCard: React.FC<FanInsightCardProps> = ({ item }) => {
+  const { t } = useTranslation();
   const trendIcons = {
     Up: <ArrowUpRight className="text-green-500 animate-pulse shrink-0" size={12} />,
     Down: <ArrowDownRight className="text-red-500 animate-pulse shrink-0" size={12} />,
@@ -27,37 +29,37 @@ export const FanInsightCard: React.FC<FanInsightCardProps> = ({ item }) => {
         {/* Title & Trend */}
         <div className="flex justify-between items-start">
           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
-            {item.title}
+            {t(item.title)}
           </span>
           <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase ${trendColors[item.trend]}`}>
             {trendIcons[item.trend]}
-            {item.trend}
+            {t(item.trend)}
           </span>
         </div>
 
         {/* Live score details */}
         <div className="flex justify-between items-baseline">
           <div>
-            <span className="text-[9px] text-slate-400 font-bold block uppercase">Live Status</span>
-            <span className="text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase">{item.status}</span>
+            <span className="text-[9px] text-slate-400 font-bold block uppercase">{t("Live Status")}</span>
+            <span className="text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase">{t(item.status)}</span>
           </div>
           <div className="text-right">
-            <span className="text-[9px] text-secondary font-bold block uppercase">AI Rating</span>
-            <span className="text-sm font-extrabold text-primary dark:text-secondary font-display">{item.score}</span>
+            <span className="text-[9px] text-secondary font-bold block uppercase">{t("AI Rating")}</span>
+            <span className="text-sm font-extrabold text-primary dark:text-secondary font-display">{t(item.score.toString())}</span>
           </div>
         </div>
 
         {/* Tactical Recommendation */}
         <div className="space-y-1 pt-2 border-t border-slate-50 dark:border-white/5">
-          <span className="text-[9px] text-slate-400 font-bold block uppercase">AI Recommendation</span>
+          <span className="text-[9px] text-slate-400 font-bold block uppercase">{t("AI Recommendation")}</span>
           <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed font-semibold">
-            "{item.recommendation}"
+            "{t(item.recommendation)}"
           </p>
         </div>
 
         {/* Footer timestamp */}
         <div className="text-right text-[8px] text-slate-400 font-bold uppercase pt-1 border-t border-slate-50 dark:border-white/5">
-          <span>🕒 Last Updated: {item.lastUpdated}</span>
+          <span>🕒 {t("Last Updated")}: {item.lastUpdated}</span>
         </div>
 
       </CardContent>

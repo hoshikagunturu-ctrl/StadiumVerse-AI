@@ -1,11 +1,13 @@
 import React from 'react';
 import type { SmartNotification } from '../data/fanSustainabilityData';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface NotificationItemProps {
   item: SmartNotification;
 }
 
 export const NotificationItem: React.FC<NotificationItemProps> = ({ item }) => {
+  const { t } = useTranslation();
   const categoryBadges = {
     'Eco': 'bg-green-500/10 text-green-500 border border-green-500/20',
     'Accessibility': 'bg-blue-500/10 text-blue-500 border border-blue-500/20',
@@ -28,12 +30,12 @@ export const NotificationItem: React.FC<NotificationItemProps> = ({ item }) => {
         </span>
         <div className="space-y-1 text-left">
           <p className="text-xs font-semibold text-slate-700 dark:text-white leading-normal">
-            {item.message}
+            {t(item.message)}
           </p>
           <div className="flex items-center gap-2">
             <span className="text-[8px] text-slate-400 font-bold">{item.timestamp}</span>
             <span className={`px-1.5 py-0.5 rounded text-[8px] uppercase font-bold tracking-wider ${categoryBadges[item.category]}`}>
-              {item.category}
+              {t(item.category)}
             </span>
           </div>
         </div>
@@ -44,7 +46,7 @@ export const NotificationItem: React.FC<NotificationItemProps> = ({ item }) => {
         item.priority === 'High' ? 'bg-orange-500/10 text-orange-500' :
         item.priority === 'Medium' ? 'bg-amber-500/10 text-amber-500' : 'bg-slate-100 text-slate-400 dark:bg-white/5'
       }`}>
-        {item.priority}
+        {t(item.priority)}
       </span>
     </div>
   );
