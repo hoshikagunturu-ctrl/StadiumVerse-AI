@@ -67,14 +67,30 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
         
         if (!screenReaderActive) return;
 
+        // Resolve active system language dynamically from local storage settings
+        let currentLang = 'en-US';
+        try {
+          const savedSettings = localStorage.getItem('wc-stadium-settings');
+          if (savedSettings) {
+            const parsed = JSON.parse(savedSettings);
+            if (parsed.language === 'es') currentLang = 'es-ES';
+            else if (parsed.language === 'fr') currentLang = 'fr-FR';
+            else if (parsed.language === 'ar') currentLang = 'ar-SA';
+          }
+        } catch {
+          // Fallback to English in case of JSON parse anomalies
+        }
+
         setTimeout(() => {
           const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = currentLang;
           utterance.rate = 1.0;
           
           const voices = window.speechSynthesis.getVoices();
           if (voices && voices.length > 0) {
-            const enVoice = voices.find(v => v.lang.startsWith('en')) || voices[0];
-            utterance.voice = enVoice;
+            const matchLang = currentLang.split('-')[0];
+            const matchedVoice = voices.find(v => v.lang.startsWith(matchLang)) || voices[0];
+            utterance.voice = matchedVoice;
           }
           window.speechSynthesis.speak(utterance);
         }, 50);
