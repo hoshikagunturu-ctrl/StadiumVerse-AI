@@ -6,7 +6,7 @@ interface AccessibilityStatusCardProps {
   item: AccessibilityItem;
 }
 
-export const AccessibilityStatusCard: React.FC<AccessibilityStatusCardProps> = ({ item }) => {
+const AccessibilityStatusCardComponent: React.FC<AccessibilityStatusCardProps> = ({ item }) => {
   return (
     <BaseInsightCard
       title={item.title}
@@ -25,3 +25,5 @@ export const AccessibilityStatusCard: React.FC<AccessibilityStatusCardProps> = (
     />
   );
 };
+
+export const AccessibilityStatusCard = React.memo(AccessibilityStatusCardComponent);

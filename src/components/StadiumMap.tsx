@@ -10,7 +10,7 @@ interface StadiumMapProps {
   showEmergencyExits?: boolean;
 }
 
-export const StadiumMap: React.FC<StadiumMapProps> = ({
+const StadiumMapComponent: React.FC<StadiumMapProps> = ({
   highlightedSection = '',
   activeRoute = null,
   onSectionClick,
@@ -275,3 +275,5 @@ export const StadiumMap: React.FC<StadiumMapProps> = ({
     </Card>
   );
 };
+
+export const StadiumMap = React.memo(StadiumMapComponent);

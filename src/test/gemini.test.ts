@@ -5,6 +5,7 @@ describe('geminiService', () => {
   beforeEach(() => {
     vi.resetModules();
     vi.stubGlobal('fetch', vi.fn());
+    geminiService.clearCache();
   });
 
   afterEach(() => {

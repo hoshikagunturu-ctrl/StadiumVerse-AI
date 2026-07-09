@@ -13,7 +13,27 @@ export interface GeminiResponse {
   error?: string;
 }
 
+const cache = new Map<string, GeminiResponse>();
+const MAX_CACHE_SIZE = 100;
+
+const setCache = (key: string, value: GeminiResponse) => {
+  if (cache.size >= MAX_CACHE_SIZE) {
+    const firstKey = cache.keys().next().value;
+    if (firstKey !== undefined) {
+      cache.delete(firstKey);
+    }
+  }
+  cache.set(key, value);
+};
+
 export const geminiService = {
+  /**
+   * Clears the API response cache.
+   */
+  clearCache: (): void => {
+    cache.clear();
+  },
+
   /**
    * Retrieves the secure API key from Vite environment variables.
    */
@@ -59,6 +79,12 @@ export const geminiService = {
 
     console.log("[Gemini API] Outgoing Request Payload:", JSON.stringify({ contents: contentsBody }, null, 2));
 
+    const cacheKey = JSON.stringify({ contents: contentsBody, model });
+    if (cache.has(cacheKey)) {
+      console.log("[Gemini API] Serving cached response.");
+      return cache.get(cacheKey)!;
+    }
+
     try {
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
@@ -90,7 +116,9 @@ export const geminiService = {
         throw new Error("Invalid response format received from Gemini API.");
       }
 
-      return { text };
+      const result = { text };
+      setCache(cacheKey, result);
+      return result;
     } catch (err: any) {
       const errMsg = err.message || 'Unknown network error occurred.';
       console.error("[Gemini API] Exception Error:", errMsg);

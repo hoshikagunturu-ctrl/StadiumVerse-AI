@@ -6,7 +6,7 @@ interface SustainabilityMetricCardProps {
   item: SustainabilityMetric;
 }
 
-export const SustainabilityMetricCard: React.FC<SustainabilityMetricCardProps> = ({ item }) => {
+const SustainabilityMetricCardComponent: React.FC<SustainabilityMetricCardProps> = ({ item }) => {
   return (
     <BaseInsightCard
       title={item.title}
@@ -24,3 +24,5 @@ export const SustainabilityMetricCard: React.FC<SustainabilityMetricCardProps> =
     />
   );
 };
+
+export const SustainabilityMetricCard = React.memo(SustainabilityMetricCardComponent);

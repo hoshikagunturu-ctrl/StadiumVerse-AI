@@ -8,7 +8,7 @@ interface FanInsightCardProps {
   item: FanInsight;
 }
 
-export const FanInsightCard: React.FC<FanInsightCardProps> = ({ item }) => {
+const FanInsightCardComponent: React.FC<FanInsightCardProps> = ({ item }) => {
   const { t } = useTranslation();
   
   const trendIcons = {
@@ -50,3 +50,5 @@ export const FanInsightCard: React.FC<FanInsightCardProps> = ({ item }) => {
     />
   );
 };
+
+export const FanInsightCard = React.memo(FanInsightCardComponent);

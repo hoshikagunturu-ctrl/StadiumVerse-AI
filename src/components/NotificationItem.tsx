@@ -6,7 +6,7 @@ interface NotificationItemProps {
   item: SmartNotification;
 }
 
-export const NotificationItem: React.FC<NotificationItemProps> = ({ item }) => {
+const NotificationItemComponent: React.FC<NotificationItemProps> = ({ item }) => {
   const { t } = useTranslation();
   const categoryBadges = {
     'Eco': 'bg-green-500/10 text-green-500 border border-green-500/20',
@@ -51,3 +51,5 @@ export const NotificationItem: React.FC<NotificationItemProps> = ({ item }) => {
     </div>
   );
 };
+
+export const NotificationItem = React.memo(NotificationItemComponent);

@@ -9,7 +9,7 @@ interface InsightCardProps {
   insight: ForecastInsight;
 }
 
-export const InsightCard: React.FC<InsightCardProps> = ({ insight }) => {
+const InsightCardComponent: React.FC<InsightCardProps> = ({ insight }) => {
   const { t } = useTranslation();
   return (
     <Card variant="glass" className="hover:scale-[1.01] duration-300 border border-slate-100 dark:border-white/10 shadow-sm bg-white dark:bg-stadium-dark">
@@ -37,3 +37,5 @@ export const InsightCard: React.FC<InsightCardProps> = ({ insight }) => {
     </Card>
   );
 };
+
+export const InsightCard = React.memo(InsightCardComponent);

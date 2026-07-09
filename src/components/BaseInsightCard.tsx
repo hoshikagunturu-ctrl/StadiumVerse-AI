@@ -18,7 +18,7 @@ interface BaseInsightCardProps {
   footerText?: React.ReactNode;
 }
 
-export const BaseInsightCard: React.FC<BaseInsightCardProps> = ({
+const BaseInsightCardComponent: React.FC<BaseInsightCardProps> = ({
   title,
   headerAction,
   leftStat,
@@ -82,3 +82,5 @@ export const BaseInsightCard: React.FC<BaseInsightCardProps> = ({
     </Card>
   );
 };
+
+export const BaseInsightCard = React.memo(BaseInsightCardComponent);

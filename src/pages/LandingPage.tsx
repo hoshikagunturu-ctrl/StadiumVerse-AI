@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Trophy, ChevronRight, Globe, Clock, 
@@ -72,13 +72,13 @@ export const LandingPage: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleRoleQuickAction = (role: UserRole) => {
+  const handleRoleQuickAction = useCallback((role: UserRole) => {
     login(role);
     speak(`Switched profile console to ${role}`);
     navigate(`/${role}-dashboard`);
-  };
+  }, [login, speak, navigate]);
 
-  const coreCapabilities = [
+  const coreCapabilities = useMemo(() => [
     { 
       path: "/ai-assistant", 
       title: "Multilingual AI Assistant", 
@@ -121,9 +121,9 @@ export const LandingPage: React.FC = () => {
       icon: <Accessibility className="text-blue-400" size={20} />,
       benefit: "Fully WCAG compliant tournament companion."
     }
-  ];
+  ], []);
 
-  const roles = [
+  const roles = useMemo(() => [
     {
       role: 'fan' as UserRole,
       title: 'Fan',
@@ -160,7 +160,7 @@ export const LandingPage: React.FC = () => {
       btnText: "CONNECT AS VENUE STAFF",
       color: "outline" as const
     }
-  ];
+  ], []);
 
   return (
     <div className="space-y-12 py-4">

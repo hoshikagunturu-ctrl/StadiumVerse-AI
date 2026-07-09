@@ -8,7 +8,7 @@ interface ForecastCardProps {
   item: ForecastItem;
 }
 
-export const ForecastCard: React.FC<ForecastCardProps> = ({ item }) => {
+const ForecastCardComponent: React.FC<ForecastCardProps> = ({ item }) => {
   const { t } = useTranslation();
   // Find min/max values for normalizing bar heights
   const values = item.sparklineValues;
@@ -80,3 +80,5 @@ export const ForecastCard: React.FC<ForecastCardProps> = ({ item }) => {
     </Card>
   );
 };
+
+export const ForecastCard = React.memo(ForecastCardComponent);

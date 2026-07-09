@@ -10,7 +10,7 @@ interface IncidentCardProps {
   onClick: () => void;
 }
 
-export const IncidentCard: React.FC<IncidentCardProps> = ({
+const IncidentCardComponent: React.FC<IncidentCardProps> = ({
   incident,
   isSelected,
   onClick,
@@ -67,3 +67,5 @@ export const IncidentCard: React.FC<IncidentCardProps> = ({
     </button>
   );
 };
+
+export const IncidentCard = React.memo(IncidentCardComponent);
